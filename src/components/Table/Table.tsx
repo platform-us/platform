@@ -9,6 +9,10 @@ const StyledTable = styled.table`
     font-size: 12px;
     color: #707070;
   }
+
+  tbody > tr > td {
+    padding: 5px 2px;
+  }
 `;
 
 export interface TableProps {

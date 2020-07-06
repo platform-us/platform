@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { SearchBar } from '../Search';
 
 const Container = styled.div`
   width: 100%;
@@ -45,6 +46,7 @@ const Nav: React.FC<NavProps> = () => {
     <Container>
       <nav>
         <h1>Platform</h1>
+        <SearchBar onClick={() => console.log('click')} />
         <div>
           <p>My Platform</p>
           <FontAwesomeIcon icon={faUserCircle} size="2x" />
