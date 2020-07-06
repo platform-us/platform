@@ -5,16 +5,20 @@ import '../../index.css';
 
 <Meta title="Table" component={Table} />
 
-Give each row a component and then it will automatically wrap the content in that component.
+# Table component
 
-# Preview
+Optionally give each row a component and then it will automatically wrap the cell content in that component.
+
+TODO: Sorting columns
+
+## Preview
 
 <Preview>
   <Story name="Table">
     <div style={{ margin: 10 }}>
       <Table
         header={[
-          { title: 'Name', component: ({ children }) => <p>{children}</p> },
+          { title: 'Name' },
           {
             title: 'Handle',
             component: ({ children }) => <code>@{children}</code>,
@@ -27,20 +31,27 @@ Give each row a component and then it will automatically wrap the content in tha
         ]}
         rows={[
           {
+            id: 1,
             cells: [
-              { value: 'James Medlock' },
-              { value: 'jdcmedlock' },
-              { value: true },
+              { id: 1, value: 'James Medlock' },
+              { id: 2, value: 'jdcmedlock' },
+              { id: 3, value: true },
             ],
           },
           {
-            cells: [{ value: 'Liz' }, { value: 'pseudocia' }, { value: true }],
+            id: 2,
+            cells: [
+              { id: 1, value: 'Liz' },
+              { id: 2, value: 'pseudocia' },
+              { id: 3, value: true },
+            ],
           },
           {
+            id: 3,
             cells: [
-              { value: 'Donald John Trump' },
-              { value: 'realdonaldtrump' },
-              { value: false },
+              { id: 1, value: 'Donald John Trump' },
+              { id: 2, value: 'realdonaldtrump' },
+              { id: 3, value: false },
             ],
           },
         ]}
@@ -49,45 +60,8 @@ Give each row a component and then it will automatically wrap the content in tha
   </Story>
 </Preview>
 
-These are the props that I gave it:
+## Props
 
-<pre>
-  {`header={[
-  { title: 'Name', component: ({ children }) => <p>{children}</p> },
-  {
-    title: 'Handle',
-    component: ({ children }) => <code>@{children}</code>,
-  },
-  {
-    title: 'Based?',
-    component: ({ children }) =>
-      children ? <p>BASED</p> : <p>NOT BASED</p>,
-  },
-]}
-rows={[
-  {
-    cells: [
-      { value: 'James Medlock' },
-      { value: 'jdcmedlock' },
-      { value: true },
-    ],
-  },{
-    cells: [
-      { value: 'Liz' },
-      { value: 'pseudocia' },
-      { value: true },
-    ],
-  },
-  {
-    cells: [
-      { value: 'Donald John Trump' },
-      { value: 'realdonaldtrump' },
-      { value: false },
-    ],
-  },
-]}`}
-</pre>
-
-# Props
+IDs are used for React keys, they can be anything. They also only need to be unique per row.
 
 <Props of={Table} />

@@ -14,11 +14,13 @@ const StyledTable = styled.table`
 export interface TableProps {
   header: {
     title: string;
-    component: ({ children }: { children: any }) => JSX.Element;
+    component?: ({ children }: { children: any }) => JSX.Element;
   }[];
   rows: {
     // additional data for each row can go here
+    id: any;
     cells: {
+      id: any;
       value: any;
     }[];
   }[];
@@ -40,12 +42,16 @@ const Table: React.FC<TableProps> = ({ header, rows }) => {
         {rows.map(row => {
           if (header.length !== row.cells.length) throw new Error(msg);
           return (
-            <tr>
+            <tr key={row.id}>
               {row.cells.map((cell, i) => {
                 const Component = header[i].component;
                 return (
-                  <td>
-                    <Component>{cell.value}</Component>
+                  <td key={cell.id}>
+                    {Component === undefined ? (
+                      cell.value
+                    ) : (
+                      <Component>{cell.value}</Component>
+                    )}
                   </td>
                 );
               })}
