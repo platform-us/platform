@@ -12,7 +12,7 @@ const Container = styled.div`
   width: 100%;
   border-radius: 7px;
   padding: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 6px #00000025;
 `;
 
 export interface CardProps {

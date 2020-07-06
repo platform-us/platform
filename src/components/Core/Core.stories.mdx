@@ -1,0 +1,56 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { faPlus, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Button from './Button';
+
+import '../../index.css';
+
+<Meta title="Core" />
+
+# Core components
+
+Assorted generic components go here.
+
+## Button component
+
+Simple button.
+
+### Preview
+
+<Preview>
+  <Story name="Button">
+    <div style={{ margin: 10 }}>
+      <Button onClick={action('click')}>I'm a button</Button>
+    </div>
+  </Story>
+  <Story name="Button with left icon">
+    <div style={{ margin: 10 }}>
+      <Button onClick={action('click')} icon={{ left: faPlus }}>
+        I'm a button
+      </Button>
+    </div>
+  </Story>
+  <Story name="Button with right icon">
+    <div style={{ margin: 10 }}>
+      <Button onClick={action('click')} icon={{ right: faChevronRight }}>
+        I'm a button
+      </Button>
+    </div>
+  </Story>
+</Preview>
+
+You can supply the `link` prop and it will be an `<a>` element instead.
+
+<Preview>
+  <Story name="Button link">
+    <div style={{ margin: 10 }}>
+      <Button link onClick={action('click')}>
+        I'm a link
+      </Button>
+    </div>
+  </Story>
+</Preview>
+
+### Props
+
+<Props of={Button} />

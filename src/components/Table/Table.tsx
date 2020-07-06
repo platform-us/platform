@@ -12,45 +12,42 @@ const StyledTable = styled.table`
 `;
 
 export interface TableProps {
-  header: {
+  headers: {
     title: string;
-    component?: ({ children }: { children: any }) => JSX.Element;
+    component?: ({ value }: { value: any }) => JSX.Element;
   }[];
   rows: {
     // additional data for each row can go here
     id: any;
-    cells: {
-      id: any;
-      value: any;
-    }[];
+    cells: any[];
   }[];
 }
 
 const msg = 'Must be an equal number of column in the header and the body';
 
-const Table: React.FC<TableProps> = ({ header, rows }) => {
+const Table: React.FC<TableProps> = ({ headers, rows }) => {
   return (
     <StyledTable>
       <thead>
         <tr>
-          {header.map(({ title }) => (
-            <th>{title}</th>
+          {headers.map(({ title }) => (
+            <th key={title}>{title}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {rows.map(row => {
-          if (header.length !== row.cells.length) throw new Error(msg);
+          if (headers.length !== row.cells.length) throw new Error(msg);
           return (
             <tr key={row.id}>
               {row.cells.map((cell, i) => {
-                const Component = header[i].component;
+                const Component = headers[i].component;
                 return (
-                  <td key={cell.id}>
+                  <td key={headers[i].title}>
                     {Component === undefined ? (
-                      cell.value
+                      cell
                     ) : (
-                      <Component>{cell.value}</Component>
+                      <Component value={cell} />
                     )}
                   </td>
                 );
