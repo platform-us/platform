@@ -1,0 +1,33 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Card from './Card';
+
+import '../../index.css';
+
+<Meta title="Card" component={Card} />
+
+Just a non-functional componenet for now.
+
+# Preview
+
+<Preview>
+  <Story name="Card with Title">
+    <div style={{ margin: 10 }}>
+      <Card title="I'm a title">
+        <h4>Content</h4>
+        <p>Content Content Content</p>
+      </Card>
+    </div>
+  </Story>
+  <Story name="Card without Title">
+    <div style={{ margin: 10 }}>
+      <Card>
+        <h4>Content</h4>
+        <p>Content Content Content</p>
+      </Card>
+    </div>
+  </Story>
+</Preview>
+
+# Props
+
+<Props of={Card} />
