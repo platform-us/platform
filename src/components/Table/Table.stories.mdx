@@ -1,0 +1,93 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Table from './Table';
+
+import '../../index.css';
+
+<Meta title="Table" component={Table} />
+
+Give each row a component and then it will automatically wrap the content in that component.
+
+# Preview
+
+<Preview>
+  <Story name="Table">
+    <div style={{ margin: 10 }}>
+      <Table
+        header={[
+          { title: 'Name', component: ({ children }) => <p>{children}</p> },
+          {
+            title: 'Handle',
+            component: ({ children }) => <code>@{children}</code>,
+          },
+          {
+            title: 'Based?',
+            component: ({ children }) =>
+              children ? <p>BASED</p> : <p>NOT BASED</p>,
+          },
+        ]}
+        rows={[
+          {
+            cells: [
+              { value: 'James Medlock' },
+              { value: 'jdcmedlock' },
+              { value: true },
+            ],
+          },
+          {
+            cells: [{ value: 'Liz' }, { value: 'pseudocia' }, { value: true }],
+          },
+          {
+            cells: [
+              { value: 'Donald John Trump' },
+              { value: 'realdonaldtrump' },
+              { value: false },
+            ],
+          },
+        ]}
+      />
+    </div>
+  </Story>
+</Preview>
+
+These are the props that I gave it:
+
+<pre>
+  {`header={[
+  { title: 'Name', component: ({ children }) => <p>{children}</p> },
+  {
+    title: 'Handle',
+    component: ({ children }) => <code>@{children}</code>,
+  },
+  {
+    title: 'Based?',
+    component: ({ children }) =>
+      children ? <p>BASED</p> : <p>NOT BASED</p>,
+  },
+]}
+rows={[
+  {
+    cells: [
+      { value: 'James Medlock' },
+      { value: 'jdcmedlock' },
+      { value: true },
+    ],
+  },{
+    cells: [
+      { value: 'Liz' },
+      { value: 'pseudocia' },
+      { value: true },
+    ],
+  },
+  {
+    cells: [
+      { value: 'Donald John Trump' },
+      { value: 'realdonaldtrump' },
+      { value: false },
+    ],
+  },
+]}`}
+</pre>
+
+# Props
+
+<Props of={Table} />
