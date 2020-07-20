@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(
   jwt({ secret, algorithms: ['HS256'] }).unless({
-    path: ['/api/signin', '/api/signup', '/api/policy'],
+    path: ['/api/auth', '/api/signin', '/api/signup', '/api/policy'],
   })
 );
 
