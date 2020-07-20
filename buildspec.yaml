@@ -1,15 +1,14 @@
 version: 0.2
 
 phases:
-  install_client:
+  install:
     commands:
       - cd client
       - yarn install
-  install_server:
-    commands:
+      - cd ..
       - cd server
       - yarn install
-  build_client:
+  build:
     commands:
       - cd client
       - yarn build
