@@ -4,7 +4,7 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cd server && yarn start",
+    "start": "node server",
     "dev": "concurrently \"nodemon server --ignore 'client'\" \"cd client && yarn start\"",
     "format": "prettier --write client/src/ && prettier --write server/"
   },
