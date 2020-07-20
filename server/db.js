@@ -5,10 +5,10 @@ var pool;
 const getPool = () => {
   if (pool) return pool;
   return new Pool({
-    host: process.env.DB_URL,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    host: process.env.DB_HOSTNAME,
+    database: process.env.RDS_DB_NAME,
+    password: process.env.RDS_PASSWORD,
+    port: process.env.RDS_PORT,
     ssl: true,
   });
 };

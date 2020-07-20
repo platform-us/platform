@@ -1,7 +1,6 @@
 version: 0.2
 
 phases:
-  nodejs: 12.x
   install_client:
     commands:
       - cd client
