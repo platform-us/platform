@@ -4,11 +4,13 @@ phases:
   install:
     commands:
       - cd client
-      - yarn install
+      - yarn install --production
       - cd ..
       - cd server
-      - yarn install
+      - yarn install --production
+      - cd ..
   build:
     commands:
       - cd client
       - yarn build
+      - cd ..
