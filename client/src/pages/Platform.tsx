@@ -12,16 +12,20 @@ const defaultPolicy: Policy = {
   author: 'Henry George',
   revenue: {
     inc: 200,
-    dec: 15,
+    dec: 150,
   },
   level: 'Federal',
   tags: ['Land Use', 'Tax', 'Urbanism'],
 };
 
 const Platform: React.FC<PlatformProps> = () => {
-  const [policies, setPolicies] = React.useState<Policy[]>([]);
+  const [policies, setPolicies] = React.useState<Policy[]>([defaultPolicy]);
 
-  const addPolicy = () => setPolicies(p => [...p, defaultPolicy]);
+  const addPolicy = async () => {
+    const res = await fetch('/api/policy', { method: 'GET' });
+    const policy = await res.json();
+    setPolicies(p => [...p, policy]);
+  };
 
   return (
     <Container>

@@ -14,12 +14,14 @@ First, install dependencies. You will need Yarn (or NPM).
 
 ```
 yarn
+cd client && yarn && cd ..
+cd server && yarn && cd ..
 ```
 
 ### Starting the app
 
 ```
-yarn start
+yarn dev
 ```
 
 ### Starting Storybook
@@ -27,13 +29,10 @@ yarn start
 For viewing individual components.
 
 ```
+cd client
 yarn storybook
 ```
 
 ## Building and serving
 
-Once dependencies are installed, you can build the app using:
-
-```
-yarn build
-```
+Deploying to AWS is handled by AWS CodeBuild. Check out `buildspec.yaml` for the steps.

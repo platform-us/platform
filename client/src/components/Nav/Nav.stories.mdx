@@ -7,13 +7,16 @@ import '../../index.css';
 
 # Nav component
 
-Just a decorative component for now.
+Displays either log in buttons or "My Platform", depending on if the `user` prop is supplied
 
 ## Preview
 
 <Preview>
-  <Story name="Nav">
+  <Story name="Nav (signed out)">
     <Nav />
+  </Story>
+  <Story name="Nav (signed in)">
+    <Nav user={{ username: 'Jeff', id: '12345' }} />
   </Story>
 </Preview>
 

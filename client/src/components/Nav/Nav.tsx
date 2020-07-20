@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { SearchBar } from '../Search';
+import { Link as UnstyledLink } from 'react-router-dom';
+import { User, UserContext } from '../../App';
+
+const Link = styled(UnstyledLink)`
+  color: white;
+  text-decoration: none;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -15,15 +22,16 @@ const Container = styled.div`
 
   nav {
     width: 100%;
-    max-width: 800px;
+    max-width: ${({ theme }) => theme.width}px;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
 
-    h1 {
-      cursor: pointer;
+    ${Link} {
+      font-size: 24px;
+      font-weight: 700;
     }
 
     div {
@@ -31,9 +39,15 @@ const Container = styled.div`
       flex-direction: row;
       align-items: center;
 
-      p {
-        margin-right: 30px;
-        cursor: pointer;
+      ${Link} {
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      div {
+        ${Link} {
+          margin-right: 20px;
+        }
       }
     }
   }
@@ -42,14 +56,27 @@ const Container = styled.div`
 export interface NavProps {}
 
 const Nav: React.FC<NavProps> = () => {
+  const user = React.useContext<User>(UserContext);
+  
   return (
     <Container>
       <nav>
-        <h1>Platform</h1>
+        <Link to="/">Platform</Link>
         <SearchBar onClick={() => console.log('click')} />
         <div>
-          <p>My Platform</p>
-          <FontAwesomeIcon icon={faUserCircle} size="2x" />
+          {user ? (
+            <div>
+              <Link to="/my-platform">My Platform</Link>
+            </div>
+          ) : (
+            <div>
+              <Link to="/login">Login</Link>
+              <Link to="/sign-up">Sign up</Link>
+            </div>
+          )}
+          <Link to="/account">
+            <FontAwesomeIcon icon={faUserCircle} size="2x" />
+          </Link>
         </div>
       </nav>
     </Container>

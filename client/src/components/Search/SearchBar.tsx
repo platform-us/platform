@@ -9,7 +9,7 @@ const Container = styled.button`
   background-color: #f67d7d;
   height: 30px;
   flex-grow: 1;
-  max-width: 250px;
+  max-width: 350px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,7 +18,7 @@ const Container = styled.button`
   cursor: pointer;
   color: white;
   font-size: 12px;
-  margin: 0 10px;
+  margin: 0 20px;
 
   div {
     width: 12px;
