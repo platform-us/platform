@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import Table from './Table';
+import { Revenue } from '../../generated/graphql';
 
 const Name = styled.div`
   p,
@@ -16,7 +17,7 @@ const Name = styled.div`
   }
 `;
 
-const Revenue = styled.div`
+const RevenueComponent = styled.div`
   text-align: center;
 
   p {
@@ -36,6 +37,8 @@ const Text = styled.p`
   text-align: center;
 `;
 
+const TextComponent = ({ value }: { value: string }) => <Text>{value}</Text>;
+
 const headers = [
   {
     title: 'Name',
@@ -52,47 +55,44 @@ const headers = [
   },
   {
     title: 'Revenue',
-    component: ({
-      value: { inc, dec },
-    }: {
-      value: { inc: number; dec: number };
-    }) => (
-      <Revenue>
+    component: ({ increase, decrease }: Revenue) => (
+      <RevenueComponent>
         <p>
-          <FontAwesomeIcon icon={faCaretUp} /> {inc}
+          <FontAwesomeIcon icon={faCaretUp} /> {increase}
         </p>
         <p>
-          <FontAwesomeIcon icon={faCaretDown} /> {dec}
+          <FontAwesomeIcon icon={faCaretDown} /> {decrease}
         </p>
-      </Revenue>
+      </RevenueComponent>
     ),
   },
   {
     title: 'Level',
-    component: ({ value }: { value: string }) => <Text>{value}</Text>,
+    component: TextComponent,
   },
   {
     title: 'Tags',
-    component: ({ value }: { value: string }) => <Text>{value}</Text>,
+    component: TextComponent,
   },
 ];
 
-export type Policy = {
+// subset of the full policy
+type Policy = {
   name: string;
   author?: string;
   revenue: {
-    inc?: number;
-    dec?: number;
+    increase?: number;
+    decrease?: number;
   };
-  level: 'Federal' | 'State' | 'Local';
-  tags: string[];
+  level: string;
+  tags: { name: string }[];
 };
 
 export interface PolicyTableProps {
   policies: Policy[];
 }
 
-const PolicyTable: React.FC<PolicyTableProps> = ({ policies }) => {
+const PolicyTable: React.FC<PolicyTableProps> = ({ policies = [] }) => {
   return (
     <Table
       headers={headers}

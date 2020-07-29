@@ -1,17 +1,48 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Nav from './components/Nav';
-import Platform from './pages/Platform';
+import Platform from './pages/platform/Platform';
 import styled, { ThemeProvider } from 'styled-components';
 import Login from './pages/authentication/Login';
 import Signup from './pages/authentication/Signup';
-import Logout from './pages/authentication/Logout';
 import Error404 from './pages/404';
-import Account from './pages/Account';
+import { setAccessToken } from './accessToken';
+import { useUserDetailsQuery } from './generated/graphql';
+import Account from './pages/account/Account';
+import UserPlatforms from './pages/account/UserPlatforms';
+import CreatePlatform from './pages/platform/CreatePlatform';
 
 const defaultTheme = {
   width: 1000,
 };
+
+const Loader = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(720deg);
+    }
+  }
+
+  p {
+    margin: 0;
+    animation: rotate 1.5s infinite;
+    font-size: 30px;
+  }
+`;
 
 const Page = styled.div`
   width: 100%;
@@ -53,70 +84,77 @@ export const UserContext = React.createContext<User>(null);
 
 const App: React.FC = () => {
   const [user, setUser] = React.useState<User>(null);
+  const [loading, setLoading] = React.useState(true);
+  const { data, refetch } = useUserDetailsQuery();
 
   React.useEffect(() => {
     (async () => {
-      const jwt = localStorage.getItem('jwt');
-      try {
-        if (!jwt) throw Error('No JWT');
-        const res = await fetch('/api/auth', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        const data = await res.json();
-        if (data.success) {
-          setUser(data.user);
-          localStorage.setItem('jwt', data.jwt);
-        } else {
-          throw Error('Invalid JWT');
-        }
-      } catch (e) {
-        console.log(e.message);
-      }
+      const res = await fetch('/refresh_token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      const { accessToken } = await res.json();
+      setAccessToken(accessToken);
+      refetch();
+      setLoading(false);
     })();
-  }, []);
+  }, [refetch]);
+
+  React.useEffect(() => {
+    if (data && data.me) {
+      setUser(data.me);
+    } else {
+      setUser(null);
+    }
+  }, [data]);
+
+  if (loading) {
+    return (
+      <Loader>
+        <p>+</p>
+      </Loader>
+    );
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <UserContext.Provider value={user}>
         <Router>
           <Nav />
-          <Switch>
-            {/* Authentication */}
-            <Route path="/login">
-              <Page>
-                <Login />
-              </Page>
-            </Route>
-            <Route path="/sign-up">
-              <Page>
-                <Signup />
-              </Page>
-            </Route>
-            <Route path="/logout">
-              <Logout logout={() => setUser(null)} />
-            </Route>
-            <Route path="/account">
-              <Page>
-                <Account />
-              </Page>
-            </Route>
-            {/* Homepage */}
-            <Route path="/" exact>
-              <Page>
-                <Platform />
-              </Page>
-            </Route>
-            {/* 404 page */}
-            <Route>
-              <Page>
-                <Error404 />
-              </Page>
-            </Route>
-          </Switch>
+          <Page>
+            <Switch>
+              {/* Platforms */}
+              <Route path="/platform/create" component={CreatePlatform} />
+              <Route path="/platform/:id" component={Platform} />
+              {/* Authentication */}
+              <Route path="/login" children={<Login onLogin={refetch} />} />
+              <Route path="/sign-up" children={<Signup onLogin={refetch} />} />
+              <Route
+                path="/logout"
+                render={() => {
+                  setUser(null);
+                  return <Redirect to="/" />;
+                }}
+              />
+              {/* Accounts */}
+              <Route
+                path="/account/:username/platforms"
+                component={UserPlatforms}
+              />
+              <Route path="/account/:username" component={Account} />
+              {/* Homepage */}
+              <Route path="/" exact>
+                <h1>Welcome to Platform</h1>
+                <p>
+                  {user
+                    ? `You are logged in as ${user.username}`
+                    : 'You are not logged in'}
+                </p>
+              </Route>
+              {/* 404 page */}
+              <Route component={Error404} />
+            </Switch>
+          </Page>
         </Router>
       </UserContext.Provider>
     </ThemeProvider>

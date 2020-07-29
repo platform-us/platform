@@ -1,0 +1,52 @@
+query Platform($id: String!) {
+  platform(id: $id) {
+    id
+    name
+    author
+    summary
+    user {
+      username
+    }
+    policies {
+      id
+      name
+      author
+      revenue {
+        increase
+        decrease
+      }
+      level
+      tags {
+        name
+      }
+      parent {
+        id
+        name
+      }
+      platforms {
+        id
+        name
+      }
+    }
+  }
+}
+
+query PlatformsByUsername($username: String!, $take: Float) {
+  user(username: $username) {
+    id
+    username
+    email
+  }
+  platformsByUsername(username: $username, take: $take) {
+    id
+    name
+    author
+    policies {
+      name
+    }
+  }
+}
+
+mutation CreatePlatform($name: String!, $author: String, $summary: String) {
+  createPlatform(name: $name, author: $author, summary: $summary)
+}

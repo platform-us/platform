@@ -43,12 +43,7 @@ export interface ButtonProps {
   };
 }
 
-const Button: React.FC<ButtonProps> = ({
-  icon,
-  link,
-  onClick,
-  children,
-}) => {
+const Button: React.FC<ButtonProps> = ({ icon, link, onClick, children }) => {
   return (
     <StyledButton link={link} as={link ? 'a' : 'button'} onClick={onClick}>
       {icon && icon.left && (

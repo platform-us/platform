@@ -57,7 +57,7 @@ export interface NavProps {}
 
 const Nav: React.FC<NavProps> = () => {
   const user = React.useContext<User>(UserContext);
-  
+
   return (
     <Container>
       <nav>
@@ -66,7 +66,9 @@ const Nav: React.FC<NavProps> = () => {
         <div>
           {user ? (
             <div>
-              <Link to="/my-platform">My Platform</Link>
+              <Link to={`/account/${user.username}/platforms`}>
+                My Platforms
+              </Link>
             </div>
           ) : (
             <div>
@@ -74,7 +76,7 @@ const Nav: React.FC<NavProps> = () => {
               <Link to="/sign-up">Sign up</Link>
             </div>
           )}
-          <Link to="/account">
+          <Link to={user ? `/account/${user.username}` : '/login'}>
             <FontAwesomeIcon icon={faUserCircle} size="2x" />
           </Link>
         </div>

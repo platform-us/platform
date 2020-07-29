@@ -4,13 +4,13 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server",
-    "dev": "concurrently \"nodemon server --ignore 'client'\" \"cd client && yarn start\"",
-    "format": "prettier --write client/src/ && prettier --write server/"
+    "start": "cd server && yarn start",
+    "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
+    "format": "prettier --write client/src/ && prettier --write server/src/"
   },
   "devDependencies": {
+    "@types/jwt-decode": "^2.2.1",
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   }
 }

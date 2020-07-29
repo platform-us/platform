@@ -18,6 +18,8 @@ cd client && yarn && cd ..
 cd server && yarn && cd ..
 ```
 
+You then need to create a `.env` file at the root of the repository. Ask me for it's contents!
+
 ### Starting the app
 
 ```
@@ -35,4 +37,4 @@ yarn storybook
 
 ## Building and serving
 
-Deploying to AWS is handled by AWS CodeBuild. Check out `buildspec.yaml` for the steps.
+Deploying to AWS is handled by AWS CodeBuild. To deploy, simply push to `master`! Check out `buildspec.yaml` for more details on what's actually happening.

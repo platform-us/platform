@@ -18,7 +18,7 @@ const StyledTable = styled.table`
 export interface TableProps {
   headers: {
     title: string;
-    component?: ({ value }: { value: any }) => JSX.Element;
+    component?: (props: any) => JSX.Element;
   }[];
   rows: {
     // additional data for each row can go here
@@ -48,11 +48,7 @@ const Table: React.FC<TableProps> = ({ headers, rows }) => {
                 const Component = headers[i].component;
                 return (
                   <td key={headers[i].title}>
-                    {Component === undefined ? (
-                      cell
-                    ) : (
-                      <Component value={cell} />
-                    )}
+                    {Component === undefined ? cell : <Component {...cell} />}
                   </td>
                 );
               })}
