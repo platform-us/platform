@@ -11,10 +11,7 @@ phases:
       - cd ..
   build:
     commands:
-      - cd client
       - yarn build
-      - cd ..
-
 artifacts:
   files:
     - '**/*'

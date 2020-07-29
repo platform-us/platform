@@ -4,7 +4,8 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cd server && npm start",
+    "start": "node server/build",
+    "build": "cd server && yarn build && cd .. && cd client && yarn build && cd ..",
     "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
     "format": "prettier --write client/src/ && prettier --write server/src/"
   },
