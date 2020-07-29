@@ -3,15 +3,9 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cookie-parser": "^1.4.2",
-    "@types/express": "^4.17.7",
-    "@types/graphql": "^14.5.0",
-    "@types/node": "^14.0.26",
-    "nodemon": "^2.0.4",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.7"
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.6",
@@ -26,10 +20,16 @@
     "pg": "^8.3.0",
     "reflect-metadata": "^0.1.10",
     "type-graphql": "^1.0.0-rc.3",
-    "typeorm": "0.2.25"
+    "typeorm": "0.2.25",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.7"
   },
-  "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
-    "start": "ts-node src/index.ts"
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.7",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^14.0.26",
+    "nodemon": "^2.0.4"
   }
 }
