@@ -4,7 +4,8 @@
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.6",
@@ -25,10 +26,10 @@
     "reflect-metadata": "^0.1.10",
     "type-graphql": "^1.0.0-rc.3",
     "typeorm": "0.2.25",
+    "ts-node": "8.10.2",
     "typescript": "3.9.7"
   },
   "devDependencies": {
-    "ts-node": "8.10.2",
     "nodemon": "^2.0.4"
   }
 }

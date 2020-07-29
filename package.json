@@ -4,7 +4,7 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node server/src/index.ts",
+    "start": "cd server && yarn start",
     "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
     "format": "prettier --write client/src/ && prettier --write server/src/"
   },
@@ -12,8 +12,5 @@
     "@types/jwt-decode": "^2.2.1",
     "concurrently": "^5.2.0",
     "prettier": "^2.0.5"
-  },
-  "dependencies": {
-    "ts-node": "^8.10.2"
   }
 }
