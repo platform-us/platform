@@ -14,7 +14,7 @@ import { createAccessToken, createRefreshToken } from './auth';
 import { sendRefreshToken } from './sendRefreshToken';
 import cors from 'cors';
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 (async () => {
   const app = express();

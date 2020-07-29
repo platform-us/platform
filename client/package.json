@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "proxy": "http://localhost:4000",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@apollo/client": "^3.0.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
