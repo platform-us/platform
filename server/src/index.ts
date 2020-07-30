@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import path from 'path';
-import { createConnection } from 'typeorm';
+import { createConnection, getConnectionOptions } from 'typeorm';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
@@ -15,6 +15,11 @@ import { sendRefreshToken } from './sendRefreshToken';
 import cors from 'cors';
 
 const PORT = process.env.PORT || 8080;
+
+export const createTypeormConnection = async () => {
+  const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+  return createConnection({ ...connectionOptions, name: 'default' });
+};
 
 (async () => {
   const app = express();
@@ -52,7 +57,7 @@ const PORT = process.env.PORT || 8080;
     return res.send({ ok: true, accessToken: createAccessToken(user) });
   });
 
-  await createConnection();
+  await createTypeormConnection();
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({

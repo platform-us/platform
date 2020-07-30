@@ -4,13 +4,12 @@
   "main": "server/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server/build",
+    "start": "node server/build/index.js",
     "build": "cd server && yarn build && cd .. && cd client && yarn build && cd ..",
     "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
     "format": "prettier --write client/src/ && prettier --write server/src/"
   },
   "devDependencies": {
-    "@types/jwt-decode": "^2.2.1",
     "concurrently": "^5.2.0",
     "prettier": "^2.0.5"
   }

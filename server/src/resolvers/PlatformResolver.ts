@@ -8,7 +8,7 @@ import {
 } from 'type-graphql';
 import { Platform } from '../entities/Platform';
 import { User } from '../entities/User';
-import { ContextType } from '../ContextType';
+import { Context } from '../Context';
 import { isAuth } from '../isAuth';
 
 @Resolver()
@@ -42,7 +42,7 @@ export class PlatformResolver {
 
   @Query(() => [Platform])
   @UseMiddleware(isAuth)
-  async ownPlatforms(@Ctx() { payload }: ContextType) {
+  async ownPlatforms(@Ctx() { payload }: Context) {
     const platforms = await Platform.find({
       where: { user: { id: payload.userId } },
     });
@@ -55,7 +55,7 @@ export class PlatformResolver {
     @Arg('name') name: string,
     @Arg('author', { nullable: true }) author: string,
     @Arg('summary', { nullable: true }) summary: string,
-    @Ctx() { payload }: ContextType
+    @Ctx() { payload }: Context
   ) {
     const user = await User.findOne({ where: { id: payload.userId } });
 

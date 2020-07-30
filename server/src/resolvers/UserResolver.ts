@@ -13,7 +13,7 @@ import { hash, compare } from 'bcryptjs';
 // import { getConnection } from 'typeorm';
 
 import { User } from '../entities/User';
-import { ContextType } from '../ContextType';
+import { Context } from '../Context';
 import { createRefreshToken, createAccessToken } from '../auth';
 // import { isAuth } from '../isAuth';
 import { sendRefreshToken } from '../sendRefreshToken';
@@ -45,7 +45,7 @@ export class UserResolver {
   }
 
   @Query(() => User, { nullable: true })
-  me(@Ctx() { req }: ContextType) {
+  me(@Ctx() { req }: Context) {
     const authorization = req.headers['authorization'];
 
     if (!authorization) {
@@ -84,7 +84,7 @@ export class UserResolver {
   async login(
     @Arg('username') username: string,
     @Arg('password') password: string,
-    @Ctx() { res }: ContextType
+    @Ctx() { res }: Context
   ): Promise<LoginResponse> {
     const user = await User.findOne({ where: { username } });
 
