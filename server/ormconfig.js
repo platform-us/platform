@@ -11,7 +11,7 @@ module.exports = [
     logging: true,
     entities: ['src/entities/**/*.ts'],
     migrations: ['src/migrations/**/*.ts'],
-    subscribers: ['src/subscribers/**/*.ts'],
+    // subscribers: ['src/subscribers/**/*.ts'],
     cli: {
       entitiesDir: 'src/entities',
       migrationsDir: 'src/migrations',
@@ -27,10 +27,10 @@ module.exports = [
     password: process.env.RDS_PASSWORD,
     database: process.env.RDS_DB_NAME,
     synchronize: true,
-    logging: "all",
+    logging: ['error'],
     entities: ['server/build/entities/**/*.js'],
     migrations: ['server/build/migrations/**/*.js'],
-    subscribers: ['server/build/subscribers/**/*.js'],
+    // subscribers: ['server/build/subscribers/**/*.js'],
     cli: {
       entitiesDir: 'build/entities',
       migrationsDir: 'build/migrations',
