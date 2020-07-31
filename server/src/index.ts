@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 8080;
 
 export const createTypeormConnection = async () => {
   const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
-  console.log(connectionOptions)
+  console.log(connectionOptions);
   return createConnection({ ...connectionOptions, name: 'default' });
 };
 
@@ -58,7 +58,12 @@ export const createTypeormConnection = async () => {
     return res.send({ ok: true, accessToken: createAccessToken(user) });
   });
 
-  await createTypeormConnection();
+  try {
+    await createTypeormConnection();
+  } catch (e) {
+    console.error('Could not connect to database');
+    console.error(e);
+  }
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
