@@ -28,13 +28,13 @@ module.exports = [
     database: process.env.RDS_DB_NAME,
     synchronize: true,
     logging: false,
-    entities: ['server/build/entities/**/*.js'],
-    migrations: ['server/build/migrations/**/*.js'],
+    entities: ['build/entities/**/*.js'],
+    migrations: ['build/migrations/**/*.js'],
     subscribers: ['build/subscribers/**/*.js'],
     cli: {
-      entitiesDir: 'server/build/entities',
-      migrationsDir: 'server/build/migrations',
-      subscribersDir: 'server/build/subscribers',
+      entitiesDir: 'build/entities',
+      migrationsDir: 'build/migrations',
+      subscribersDir: 'build/subscribers',
     },
   },
 ];
