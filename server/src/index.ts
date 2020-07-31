@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 8080;
 
 export const createTypeormConnection = async () => {
   const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+  console.log(connectionOptions)
   return createConnection({ ...connectionOptions, name: 'default' });
 };
 

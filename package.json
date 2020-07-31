@@ -1,7 +1,7 @@
 {
   "name": "platform",
   "version": "1.0.0",
-  "main": "server/index.js",
+  "main": "server/src/index.ts",
   "license": "MIT",
   "scripts": {
     "start": "node server/build/index.js",
