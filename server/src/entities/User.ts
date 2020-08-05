@@ -34,7 +34,7 @@ export class User extends BaseEntity {
   @Column('int', { default: 0 })
   tokenVersion: string;
 
-  @Field(() => [Platform])
+  @Field(() => [Platform], { nullable: true })
   @OneToMany(() => Platform, platform => platform.user)
   platforms: [Platform];
 }

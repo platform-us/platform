@@ -13,6 +13,7 @@ import { User } from './entities/User';
 import { createAccessToken, createRefreshToken } from './auth';
 import { sendRefreshToken } from './sendRefreshToken';
 import cors from 'cors';
+import { PolicyResolver } from './resolvers/PolicyResolver';
 
 const PORT = process.env.PORT || 8080;
 
@@ -61,7 +62,7 @@ export const createTypeormConnection = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, PlatformResolver],
+      resolvers: [UserResolver, PlatformResolver, PolicyResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
   });

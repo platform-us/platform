@@ -21,26 +21,13 @@ export class PlatformResolver {
     return platform;
   }
 
-  @Query(() => [Platform])
+  @Query(() => [Platform], { nullable: true })
   async platforms() {
     const platforms = await Platform.find();
     return platforms;
   }
 
-  @Query(() => [Platform])
-  async platformsByUsername(
-    @Arg('username') username: string,
-    @Arg('take', { nullable: true }) take: number
-  ) {
-    const platforms = await Platform.createQueryBuilder('platform')
-      .leftJoinAndSelect('platform.user', 'user')
-      .where('user.username = :username', { username })
-      .take(take)
-      .getMany();
-    return platforms;
-  }
-
-  @Query(() => [Platform])
+  @Query(() => [Platform], { nullable: true })
   @UseMiddleware(isAuth)
   async ownPlatforms(@Ctx() { payload }: Context) {
     const platforms = await Platform.find({

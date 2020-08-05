@@ -32,14 +32,17 @@ export class UserResolver {
     return 'Hello World';
   }
 
-  // @Query(() => [User])
-  // users() {
-  //   return User.find();
-  // }
+  @Query(() => [User])
+  users() {
+    return User.find();
+  }
 
   @Query(() => User, { nullable: true })
   async user(@Arg('username') username: string) {
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({
+      relations: ['platforms'],
+      where: { username },
+    });
 
     return user || null;
   }

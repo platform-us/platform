@@ -66,10 +66,7 @@ const Nav: React.FC<NavProps> = () => {
         <div>
           {user ? (
             <div>
-              <Link to="/platform/create">Create</Link>
-              <Link to={`/account/${user.username}/platforms`}>
-                My Platforms
-              </Link>
+              <Link to="/platform/create">New Platform</Link>
             </div>
           ) : (
             <div>

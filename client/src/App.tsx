@@ -14,35 +14,12 @@ import Error404 from './pages/404';
 import { setAccessToken } from './accessToken';
 import { useUserDetailsQuery } from './generated/graphql';
 import Account from './pages/account/Account';
-import UserPlatforms from './pages/account/UserPlatforms';
 import CreatePlatform from './pages/platform/CreatePlatform';
+import Loader from './components/Loader';
 
 const defaultTheme = {
   width: 1000,
 };
-
-const Loader = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(720deg);
-    }
-  }
-
-  p {
-    margin: 0;
-    animation: rotate 1.5s infinite;
-    font-size: 30px;
-  }
-`;
 
 const Page = styled.div`
   width: 100%;
@@ -109,11 +86,7 @@ const App: React.FC = () => {
   }, [data]);
 
   if (loading) {
-    return (
-      <Loader>
-        <p>+</p>
-      </Loader>
-    );
+    return <Loader />;
   }
 
   return (
@@ -137,10 +110,6 @@ const App: React.FC = () => {
                 }}
               />
               {/* Accounts */}
-              <Route
-                path="/account/:username/platforms"
-                component={UserPlatforms}
-              />
               <Route path="/account/:username" component={Account} />
               {/* Homepage */}
               <Route path="/" exact>

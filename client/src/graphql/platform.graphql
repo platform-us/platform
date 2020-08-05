@@ -31,18 +31,18 @@ query Platform($id: String!) {
   }
 }
 
-query PlatformsByUsername($username: String!, $take: Float) {
+query UserPlatforms($username: String!) {
   user(username: $username) {
     id
     username
     email
-  }
-  platformsByUsername(username: $username, take: $take) {
-    id
-    name
-    author
-    policies {
+    platforms {
+      id
       name
+      author
+      policies {
+        name
+      }
     }
   }
 }
