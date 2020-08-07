@@ -1,0 +1,30 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Loader from './Loader';
+import Card from '../Card';
+
+import '../../index.css';
+
+<Meta title="Loader" component={Loader} />
+
+# Loader component
+
+Spinny + sign
+
+## Preview
+
+<Preview>
+  <Story name="Loader">
+    <Loader />
+  </Story>
+  <Story name="Loader in card">
+    <div style={{ margin: 10 }}>
+      <Card title="I'm loading">
+        <Loader overlay />
+      </Card>
+    </div>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Loader} />

@@ -75,12 +75,11 @@ export class UserResolver {
 
     try {
       await User.insert({ username, email, password: hashed });
+      return true;
     } catch (e) {
       console.log(e);
       return false;
     }
-
-    return true;
   }
 
   @Mutation(() => LoginResponse)

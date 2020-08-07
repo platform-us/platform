@@ -16,15 +16,11 @@ export class User extends BaseEntity {
   id: string;
 
   @Field(() => String)
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   username: string;
 
   @Field(() => String)
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   email: string;
 
   @Column()

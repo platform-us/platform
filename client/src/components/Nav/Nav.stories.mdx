@@ -1,4 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { StaticRouter } from 'react-router-dom';
+import { UserContext } from '../../App';
 import Nav from './Nav';
 
 import '../../index.css';
@@ -13,10 +15,18 @@ Displays either log in buttons or "My Platforms", depending on if the `user` pro
 
 <Preview>
   <Story name="Nav (signed out)">
-    <Nav />
+    <StaticRouter>
+      <Nav />
+    </StaticRouter>
   </Story>
   <Story name="Nav (signed in)">
-    <Nav user={{ username: 'Jeff', id: '12345' }} />
+    <StaticRouter>
+      <UserContext.Provider
+        value={{ username: 'Mr Test', email: 'test@test.com', id: '69' }}
+      >
+        <Nav />
+      </UserContext.Provider>
+    </StaticRouter>
   </Story>
 </Preview>
 

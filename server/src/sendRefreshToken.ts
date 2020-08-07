@@ -6,3 +6,10 @@ export const sendRefreshToken = (res: Response, token: string) => {
     sameSite: 'lax',
   });
 };
+
+export const clearRefreshToken = (res: Response) => {
+  res.clearCookie('jid', {
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+};

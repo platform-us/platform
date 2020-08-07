@@ -3,29 +3,46 @@ import styled from 'styled-components';
 
 const Spinner = styled.div`
   width: 100%;
-  height: 100vh;
+  height: ${(props: { overlay: boolean }) =>
+    props.overlay ? '100%' : '100vh'};
+  position: ${(props: { overlay: boolean }) =>
+    props.overlay ? 'absolute' : 'initial'};
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  top: 0;
+  left: 0;
 
   @keyframes rotate {
-    from {
+    0% {
       transform: rotate(0deg);
     }
-    to {
-      transform: rotate(720deg);
+    50% {
+      transform: rotate(765deg);
+    }
+    100% {
+      transform: rotate(1530deg);
     }
   }
 
   p {
     margin: 0;
-    animation: rotate 1.5s infinite;
+    animation: rotate 3s infinite;
     font-size: 30px;
   }
 `;
 
-const Loader: React.FC = () => {
-  return <Spinner><p>+</p></Spinner>;
+export interface LoaderProps {
+  overlay?: boolean;
+}
+
+const Loader: React.FC<LoaderProps> = ({ overlay = false }) => {
+  return (
+    <Spinner {...{ overlay }}>
+      <p>+</p>
+    </Spinner>
+  );
 };
 
 export default Loader;

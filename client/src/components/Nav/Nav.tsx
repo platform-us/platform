@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { SearchBar } from '../Search';
+import Search, { SearchBar } from '../Search';
 import { Link as UnstyledLink } from 'react-router-dom';
 import { User, UserContext } from '../../App';
 
@@ -56,17 +56,20 @@ const Container = styled.div`
 export interface NavProps {}
 
 const Nav: React.FC<NavProps> = () => {
+  const [open, setOpen] = React.useState(false)
   const user = React.useContext<User>(UserContext);
 
   return (
+    <>
+    <Search isOpen={open} close={() => setOpen(false)} />
     <Container>
       <nav>
         <Link to="/">Platform</Link>
-        <SearchBar onClick={() => console.log('click')} />
+        <SearchBar onClick={() => setOpen(true)} />
         <div>
           {user ? (
             <div>
-              <Link to="/platform/create">New Platform</Link>
+              <Link to="/logout">Log out</Link>
             </div>
           ) : (
             <div>
@@ -80,6 +83,7 @@ const Nav: React.FC<NavProps> = () => {
         </div>
       </nav>
     </Container>
+    </>
   );
 };
 

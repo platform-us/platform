@@ -7,6 +7,7 @@ import Card from '../../components/Card';
 import { setAccessToken } from '../../accessToken';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 const Central = styled.div`
   margin: 0 auto;
@@ -22,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState();
-  const [login] = useLoginMutation();
+  const [login, { loading }] = useLoginMutation();
   const history = useHistory();
 
   const submit = async (evt: React.FormEvent<HTMLFormElement>) => {
@@ -50,6 +51,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <Container>
       <Central>
         <Card title="Log in">
+          {loading && <Loader overlay />}
           <Form onSubmit={submit}>
             {error && <p className="error">{error}</p>}
             <label>

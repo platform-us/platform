@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 import { verify } from 'jsonwebtoken';
 import { User } from './entities/User';
 import { createAccessToken, createRefreshToken } from './auth';
-import { sendRefreshToken } from './sendRefreshToken';
+import { sendRefreshToken, clearRefreshToken } from './sendRefreshToken';
 import cors from 'cors';
 import { PolicyResolver } from './resolvers/PolicyResolver';
 
@@ -56,6 +56,12 @@ export const createTypeormConnection = async () => {
     sendRefreshToken(res, createRefreshToken(user));
 
     return res.send({ ok: true, accessToken: createAccessToken(user) });
+  });
+
+  app.post('/logout', async (_, res) => {
+    clearRefreshToken(res);
+
+    res.sendStatus(200);
   });
 
   await createTypeormConnection();

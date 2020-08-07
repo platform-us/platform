@@ -20,8 +20,13 @@ const Container = styled.button`
   font-size: 12px;
   margin: 0 20px;
 
+  svg {
+    margin-right: 10px;
+  }
+
   div {
     width: 12px;
+    margin-left: 10px;
   }
 `;
 

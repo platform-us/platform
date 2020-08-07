@@ -16,6 +16,7 @@ import { useUserDetailsQuery } from './generated/graphql';
 import Account from './pages/account/Account';
 import CreatePlatform from './pages/platform/CreatePlatform';
 import Loader from './components/Loader';
+import Logout from './pages/authentication/Logout';
 
 const defaultTheme = {
   width: 1000,
@@ -102,6 +103,10 @@ const App: React.FC = () => {
               {/* Authentication */}
               <Route path="/login" children={<Login onLogin={refetch} />} />
               <Route path="/sign-up" children={<Signup onLogin={refetch} />} />
+              <Route
+                path="/logout"
+                children={<Logout clearUser={() => setUser(null)} />}
+              />
               <Route
                 path="/logout"
                 render={() => {
